@@ -5,7 +5,6 @@ import "firebase/firestore";
 import React, { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-
 import "./App.css";
 
 firebase.initializeApp({
@@ -26,7 +25,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <h1>⚛️🔥💬</h1>
+        <h1>eco chat 🌳</h1>
         <SignOut />
       </header>
 
@@ -60,6 +59,12 @@ function ChatRoom() {
 
   const [formValue, setFormValue] = useState("");
 
+  function inputValidation(e) {
+    if (formValue.length === 0) {
+      e.preventDefault();
+    }
+  }
+
   const sendMessage = async (e) => {
     e.preventDefault();
     const { uid, photoURL } = auth.currentUser;
@@ -89,7 +94,9 @@ function ChatRoom() {
           value={formValue}
           onChange={(e) => setFormValue(e.target.value)}
         />
-        <button type="submit">🕊️</button>
+        <button type="submit" onClick={inputValidation} requeried>
+          🕊️
+        </button>
       </form>
     </>
   );
