@@ -9,6 +9,5 @@
 #### 🚧 Projeto em Desenvolvimento 🚧
 
 ### 🛠️ Tecnologias Utilizadas
-- 💻 HTML, CSS e JavaScript
-- ⚛️ ReactJS
-- 🔥 Firebase
+- ⚛️ ReactJS 
+- 🔥 Firebase 
