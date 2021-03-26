@@ -9,5 +9,15 @@
 #### 🚧 Projeto em Desenvolvimento 🚧
 
 ### 🛠️ Tecnologias Utilizadas
-- ⚛️ ReactJS 
-- 🔥 Firebase 
+- ⚛️ [ReactJS](https://pt-br.reactjs.org/)
+- 🔥 [Firebase](https://firebase.google.com/)
+
+https://eco-chat.vercel.app/
+
+### Preparando o ambiente
+
+Para podermos utilizar o gerenciador de pacotes [NPM](https://www.npmjs.com/), será necessário ter instalado na sua máquina o [NodeJS](https://nodejs.org/en/)
+
+### Rodando o código na sua máquina
+
+1. #### Clone este repositório
