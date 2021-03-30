@@ -1,0 +1,49 @@
+.message {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 7px;
+}
+
+.sent {
+  flex-direction: row-reverse;
+}
+
+.sent p {
+  color: white;
+  background: #58ac5e;
+  align-self: flex-end;
+  margin-right: 10px;
+  text-align: end;
+}
+
+.received p {
+  background: #e5e5ea;
+  color: black;
+  margin-left: 10px;
+  text-align: start;
+}
+
+.message img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+ul,
+li {
+  text-align: left;
+  list-style: none;
+}
+
+p {
+  margin-bottom: 12px;
+  word-wrap: break-word;
+  max-width: 500px;
+  min-width: 30px;
+  min-height: 20px;
+  line-height: 20px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  position: relative;
+  color: white;
+}

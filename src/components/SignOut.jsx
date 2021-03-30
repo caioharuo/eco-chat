@@ -1,14 +1,16 @@
 import React from "react";
 import { auth } from "../App.jsx";
 
+import styles from "../styles/components/SignOut.module.css";
+
 export default function SignOut() {
   return (
     auth.currentUser && (
-      <button onClick={() => auth.signOut()}>
+      <button className={styles.signOutBtn} onClick={() => auth.signOut()}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
-          fill="white"
+          fill="black"
           width="40px"
           height="40px"
         >

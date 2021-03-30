@@ -2,12 +2,11 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import React from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
+import "./styles/global.css";
 
-import "./App.css";
-import ChatRoom from "./components/ChatRoom";
-import SignIn from "./components/SingIn";
-import SignOut from "./components/SignOut";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import Routes from "./routes";
 
 firebase.initializeApp({
   apiKey: "AIzaSyBQQda1RD_eRWqTwJB75O-dyMSxoP1WkWw",
@@ -22,18 +21,7 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 function App() {
-  const [user] = useAuthState(auth);
-
-  return (
-    <div className="App">
-      <header>
-        <h1>eco chat</h1>
-        <SignOut />
-      </header>
-
-      <section>{user ? <ChatRoom /> : <SignIn />}</section>
-    </div>
-  );
+  return <Routes />;
 }
 
 export default App;

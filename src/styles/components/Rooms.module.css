@@ -1,0 +1,63 @@
+div {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+ul {
+  margin-top: 20px !important;
+  width: 13rem;
+  height: 7.5rem;
+  overflow-y: auto;
+  display: flex;
+  padding: 0;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+
+ul::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+ul::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+
+ul::-webkit-scrollbar-thumb {
+  background: #58ac5e;
+}
+
+.createdRooms {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px 15px 0;
+}
+
+.createdRooms:last-child {
+  padding-bottom: 0;
+}
+
+.createdRooms li {
+  list-style: none;
+  font-weight: 600;
+}
+
+.createdRoomsLink {
+  color: #000;
+  border: none;
+  font-size: inherit;
+  font-family: inherit;
+  background-color: transparent;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0;
+  transition: all .4s;
+}
+
+.createdRoomsLink:hover {
+  color: #58ac5e;
+}

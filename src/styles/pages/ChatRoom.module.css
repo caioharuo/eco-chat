@@ -1,0 +1,140 @@
+.ChatBackground {
+  width: 100vw;
+  height: 100vh;
+
+  background-image: url(../../assets/images/background.png);
+  background-size: contain;
+}
+
+.Chat {
+  text-align: center;
+  width: 60vw;
+  min-width: 728px;
+  margin: 0 auto;
+}
+
+.Chat header {
+  background-color: #171817;
+  height: 10vh;
+  min-height: 50px;
+  color: white;
+  position: fixed;
+  width: 60vw;
+  min-width: 728px;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.Chat header h1 {
+  flex: 1;
+  letter-spacing: 7px;
+}
+
+.Chat header button {
+  padding: 0;
+  background-color: transparent;
+  height: auto;
+}
+
+.Chat section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: rgba(35, 44, 38, 0.5490196078431373);
+}
+
+.Chat .container {
+  width: 1020px;
+  margin: 0 auto;
+}
+
+.Chat section form button {
+  width: 20%;
+  background-color: #39703d;
+}
+
+.Chat section form button:hover {
+  background-color: #23532f;
+}
+
+.Chat section main {
+  height: 80vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
+
+.Chat section main::-webkit-scrollbar {
+  width: 0.75rem;
+}
+
+.Chat section main::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+
+.Chat section main::-webkit-scrollbar-thumb {
+  background: #58ac5e;
+}
+
+.Chat section form {
+  height: 10vh;
+  position: fixed;
+  bottom: 0;
+  background-color: rgb(24, 23, 23);
+  width: 60vw;
+  min-width: 728px;
+  display: flex;
+  font-size: 1.5rem;
+}
+
+.Chat section form input {
+  line-height: 1.5;
+  width: 100%;
+  font-size: 1.5rem;
+  background: #3a3a3a;
+  color: white;
+  outline: none;
+  border: none;
+  padding: 0 10px;
+}
+
+.Chat section form button {
+  background-color: #282c34;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 1.25rem;
+}
+
+.chatContainer {
+  padding: 40px 30px 30px 30px;
+}
+
+.arrowBack {
+  background-color: transparent;
+  border: none;
+  margin-left: 1.5rem;
+}
+
+.arrowBack svg {
+  width: 2rem;
+  transition: all .4s;
+}
+
+.arrowBack svg:hover {
+  fill: #b3b3b3;
+}
+
+.maxHeigth{
+  height:100vh;
+}
