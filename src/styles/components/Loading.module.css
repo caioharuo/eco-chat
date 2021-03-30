@@ -1,0 +1,18 @@
+.loadingContainer {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #f5f5f3;
+}
+
+.loadingContainer h2 {
+    position: relative;
+    top: -35px;
+    font-size: 3rem;
+    color: #222;
+}

@@ -1,15 +1,12 @@
 import firebase from "firebase/app";
-
 import { useEffect, useRef, useState } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useHistory, useParams } from "react-router";
-import { Spinner, Container, Row, Col, Jumbotron } from "react-bootstrap";
-
+import { Link } from "react-router-dom";
 import { auth, firestore } from "../App.jsx";
 import ChatMessage from "../components/ChatMessage";
-
+import Loading from "../components/Loading";
 import styles from "../styles/pages/ChatRoom.module.css";
-import { Link } from "react-router-dom";
 
 export default function ChatRoom() {
   const { roomId } = useParams();
@@ -66,20 +63,7 @@ export default function ChatRoom() {
   };
 
   if (!roomName) {
-    return (
-      <Jumbotron className={styles.maxHeigth}>
-        <Container fluid>
-          <Row className="justify-content-md-center">
-            <Col xs lg="6">
-              <span>Carregando...</span>
-              <Spinner animation="border" role="status">
-                <span className="sr-only">Loading...</span>
-              </Spinner>
-            </Col>
-          </Row>
-        </Container>
-      </Jumbotron>
-    );
+    return <Loading />;
   }
 
   return (

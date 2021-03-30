@@ -1,12 +1,10 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import React from "react";
-import "./styles/global.css";
-
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 import Routes from "./routes";
+import "./styles/global.css";
 
 firebase.initializeApp({
   apiKey: "AIzaSyBQQda1RD_eRWqTwJB75O-dyMSxoP1WkWw",
