@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { auth, firestore } from "../App.jsx";
+import { auth, firestore, messagesRef } from "../App.jsx";
 import ChatMessage from "../components/ChatMessage";
 import Loading from "../components/Loading";
 import styles from "../styles/pages/ChatRoom.module.css";
@@ -30,8 +30,6 @@ export default function ChatRoom() {
 
   const dummy = useRef();
 
-  const messagesRef = firestore.collection("messages");
-
   const query = messagesRef.orderBy("createdAt");
 
   const [messages] = useCollectionData(query, { idField: "id" });
@@ -47,7 +45,7 @@ export default function ChatRoom() {
 
   const sendMessage = async (e) => {
     e.preventDefault();
-    const { uid, photoURL } = auth.currentUser;
+    const { uid, photoURL, displayName } = auth.currentUser;
 
     await messagesRef.add({
       text: formValue,
@@ -55,6 +53,7 @@ export default function ChatRoom() {
       roomId,
       uid,
       photoURL,
+      displayName,
     });
 
     setFormValue("");
@@ -67,8 +66,8 @@ export default function ChatRoom() {
   }
 
   return (
-    <div className={styles.ChatBackground}>
-      <div className={styles.Chat}>
+    <div className={styles.chatContainer}>
+      <div className={styles.chatBackgroundImage}>
         <header>
           <Link to="/" className={styles.arrowBack}>
             <svg
@@ -87,7 +86,7 @@ export default function ChatRoom() {
 
         <section>
           <main>
-            <div className={styles.chatContainer}>
+            <div>
               {messageFromRoom &&
                 messageFromRoom.map((msg) => (
                   <ChatMessage key={msg.id} message={msg} />

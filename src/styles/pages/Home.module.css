@@ -1,7 +1,7 @@
 .signinContainer {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
 
   width: 90vw;
   height: 100vh;
@@ -16,8 +16,7 @@
 }
 
 .logoSection {
-  max-width: 30vw;
-  margin-right: 1.5rem;
+  max-width: 25vw;
 }
 
 .logoSection > button:hover {
@@ -42,7 +41,8 @@
 }
 
 .landingSection img {
-  width: 50vw;
+  width: 40vw;
+  margin-left: 3rem;
 }
 
 @media (max-width: 1024px) {

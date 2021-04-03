@@ -1,4 +1,4 @@
-.ChatBackground {
+.chatContainer {
   width: 100vw;
   height: 100vh;
 
@@ -6,14 +6,14 @@
   background-size: contain;
 }
 
-.Chat {
+.chatContainer .chatBackgroundImage {
   text-align: center;
   width: 60vw;
   min-width: 728px;
   margin: 0 auto;
 }
 
-.Chat header {
+.chatContainer .chatBackgroundImage header {
   background-color: #171817;
   height: 10vh;
   min-height: 50px;
@@ -30,18 +30,18 @@
   box-sizing: border-box;
 }
 
-.Chat header h1 {
+.chatContainer header h1 {
   flex: 1;
   letter-spacing: 7px;
 }
 
-.Chat header button {
+.chatContainer header button {
   padding: 0;
   background-color: transparent;
   height: auto;
 }
 
-.Chat section {
+.chatContainer section {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -49,40 +49,40 @@
   background-color: rgba(35, 44, 38, 0.5490196078431373);
 }
 
-.Chat .container {
+.chatContainer .container {
   width: 1020px;
   margin: 0 auto;
 }
 
-.Chat section form button {
+.chatContainer section form button {
   width: 20%;
   background-color: #39703d;
 }
 
-.Chat section form button:hover {
+.chatContainer section form button:hover {
   background-color: #23532f;
 }
 
-.Chat section main {
+.chatContainer section main {
   height: 80vh;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
 }
 
-.Chat section main::-webkit-scrollbar {
+.chatContainer section main::-webkit-scrollbar {
   width: 0.75rem;
 }
 
-.Chat section main::-webkit-scrollbar-track {
+.chatContainer section main::-webkit-scrollbar-track {
   background: #1e1e24;
 }
 
-.Chat section main::-webkit-scrollbar-thumb {
+.chatContainer section main::-webkit-scrollbar-thumb {
   background: #58ac5e;
 }
 
-.Chat section form {
+.chatContainer section form {
   height: 10vh;
   position: fixed;
   bottom: 0;
@@ -93,7 +93,7 @@
   font-size: 1.5rem;
 }
 
-.Chat section form input {
+.chatContainer section form input {
   line-height: 1.5;
   width: 100%;
   font-size: 1.5rem;
@@ -104,7 +104,7 @@
   padding: 0 10px;
 }
 
-.Chat section form button {
+.chatContainer section form button {
   background-color: #282c34;
   border: none;
   color: white;
@@ -116,7 +116,7 @@
   font-size: 1.25rem;
 }
 
-.chatContainer {
+.chatContainer section main{
   padding: 40px 30px 30px 30px;
 }
 
@@ -128,13 +128,13 @@
 
 .arrowBack svg {
   width: 2rem;
-  transition: all .4s;
+  transition: all 0.4s;
 }
 
 .arrowBack svg:hover {
   fill: #b3b3b3;
 }
 
-.maxHeigth{
-  height:100vh;
+.maxHeigth {
+  height: 100vh;
 }

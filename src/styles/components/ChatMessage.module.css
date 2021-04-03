@@ -8,19 +8,26 @@
   flex-direction: row-reverse;
 }
 
-.sent p {
+.messageContainer p {
+  margin: 0;
+  text-align: start;
+}
+
+.sent .messageContainer {
   color: white;
   background: #58ac5e;
   align-self: flex-end;
   margin-right: 10px;
-  text-align: end;
 }
 
-.received p {
+.received .messageContainer {
   background: #e5e5ea;
   color: black;
   margin-left: 10px;
-  text-align: start;
+}
+
+.messageContainer .currentTime {
+  text-align: end;
 }
 
 .message img {
@@ -35,15 +42,27 @@ li {
   list-style: none;
 }
 
-p {
+.messageContainer {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 12px;
   word-wrap: break-word;
   max-width: 500px;
   min-width: 30px;
   min-height: 20px;
   line-height: 20px;
-  padding: 10px 20px;
-  border-radius: 25px;
+  padding: 0.6rem 0.6rem 0.25rem 0.6rem;
+  border-radius: 15px;
   position: relative;
-  color: white;
+
+  text-align: initial;
+}
+
+.userName {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.currentTime {
+  font-size: 0.75rem;
 }
