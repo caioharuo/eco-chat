@@ -1,12 +1,15 @@
 import React from "react";
-import { auth } from "../App.jsx";
+import { auth } from "../database/firebase";
 
 import styles from "../styles/components/SignOut.module.css";
 
 export default function SignOut() {
   return (
     auth.currentUser && (
-      <button className={styles.signOutBtn} onClick={() => auth.signOut()}>
+      <button
+        className={styles.singOut__button}
+        onClick={() => auth.signOut()}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"

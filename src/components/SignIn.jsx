@@ -1,5 +1,5 @@
 import firebase from "firebase/app";
-import { auth } from "../App";
+import { auth } from "../database/firebase";
 
 import React from "react";
 
@@ -12,8 +12,8 @@ export default function SignIn() {
   };
 
   return (
-    <button onClick={signInWithGoogle} className={styles.signInBtn}>
-      Sign in with Google
+    <button onClick={signInWithGoogle} className={styles.signIn__button}>
+      Entre com uma conta Google
     </button>
   );
 }

@@ -13,14 +13,14 @@ export default function Loading() {
   };
 
   return (
-    <div className={styles.loadingContainer}>
+    <div className={styles.loading}>
       <Lottie
         options={defaultOptions}
         height={300}
         width={300}
         isClickToPauseDisabled={true}
       />
-      <h2>Carregando...</h2>
+      <h2 className={styles.loading__title}>Carregando...</h2>
     </div>
   );
 }

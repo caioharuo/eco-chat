@@ -1,4 +1,4 @@
-.chatContainer {
+.chatRoom {
   width: 100vw;
   height: 100vh;
 
@@ -6,14 +6,14 @@
   background-size: contain;
 }
 
-.chatContainer .chatBackgroundImage {
+.chatRoom__background {
   text-align: center;
   width: 60vw;
   min-width: 728px;
   margin: 0 auto;
 }
 
-.chatContainer .chatBackgroundImage header {
+.chatRoom__header {
   background-color: #171817;
   height: 10vh;
   min-height: 50px;
@@ -30,18 +30,27 @@
   box-sizing: border-box;
 }
 
-.chatContainer header h1 {
+.chatRoom__backToHome {
+  background-color: transparent;
+  border: none;
+  margin-left: 1.5rem;
+}
+
+.chatRoom__backToHome svg {
+  width: 2rem;
+  transition: all 0.4s;
+}
+
+.chatRoom__backToHome svg:hover {
+  fill: #b3b3b3;
+}
+
+.chatRoom__title {
   flex: 1;
   letter-spacing: 7px;
 }
 
-.chatContainer header button {
-  padding: 0;
-  background-color: transparent;
-  height: auto;
-}
-
-.chatContainer section {
+.chatRoom__messagesContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -49,51 +58,37 @@
   background-color: rgba(35, 44, 38, 0.5490196078431373);
 }
 
-.chatContainer .container {
-  width: 1020px;
-  margin: 0 auto;
-}
-
-.chatContainer section form button {
-  width: 20%;
-  background-color: #39703d;
-}
-
-.chatContainer section form button:hover {
-  background-color: #23532f;
-}
-
-.chatContainer section main {
+.chatRoom__mainSection {
   height: 80vh;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
+  padding: 40px 30px 10px 30px;
 }
 
-.chatContainer section main::-webkit-scrollbar {
+.chatRoom__mainSection::-webkit-scrollbar {
   width: 0.75rem;
 }
 
-.chatContainer section main::-webkit-scrollbar-track {
+.chatRoom__mainSection::-webkit-scrollbar-track {
   background: #1e1e24;
 }
 
-.chatContainer section main::-webkit-scrollbar-thumb {
+.chatRoom__mainSection::-webkit-scrollbar-thumb {
   background: #58ac5e;
 }
 
-.chatContainer section form {
+.chatRoom__form {
   height: 10vh;
   position: fixed;
   bottom: 0;
-  background-color: rgb(24, 23, 23);
   width: 60vw;
   min-width: 728px;
   display: flex;
   font-size: 1.5rem;
 }
 
-.chatContainer section form input {
+.chatRoom__input {
   line-height: 1.5;
   width: 100%;
   font-size: 1.5rem;
@@ -104,7 +99,7 @@
   padding: 0 10px;
 }
 
-.chatContainer section form button {
+.chatRoom__submitMessage {
   background-color: #282c34;
   border: none;
   color: white;
@@ -116,25 +111,6 @@
   font-size: 1.25rem;
 }
 
-.chatContainer section main{
-  padding: 40px 30px 30px 30px;
-}
-
-.arrowBack {
-  background-color: transparent;
-  border: none;
-  margin-left: 1.5rem;
-}
-
-.arrowBack svg {
-  width: 2rem;
-  transition: all 0.4s;
-}
-
-.arrowBack svg:hover {
-  fill: #b3b3b3;
-}
-
-.maxHeigth {
-  height: 100vh;
+.chatRoom__submitMessage:hover {
+  background-color: #23532f;
 }

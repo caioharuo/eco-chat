@@ -1,30 +1,21 @@
-import firebase from "firebase/app";
 import { useState } from "react";
 import { Button, Modal, Form, InputGroup } from "react-bootstrap";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, firestore } from "../App";
+
+import roomRepository from "../database/repositories/RoomRepository";
 
 export default function RoomModal({ rooms, show, setShow }) {
-  const [user] = useAuthState(auth);
- 
-  const roomsRef = firestore.collection("rooms");
-
   const [roomName, setRoomName] = useState("");
   const [validated, setValidated] = useState(false);
 
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
     event.preventDefault();
-    if (form.checkValidity() === false || roomName.length > 20) {
-      event.stopPropagation();
-    } else {
-      await roomsRef.add({
-        name: roomName.trim(),
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        admin: user.uid
-      });
 
+    if(form.checkValidity() === true && roomName.length <= 20){
+      roomRepository.createRoom(roomName);
       handleClose();
+    }else{
+      event.stopPropagation();
     }
     setValidated(true);
   };
@@ -68,7 +59,7 @@ export default function RoomModal({ rooms, show, setShow }) {
           <Button variant="secondary" onClick={handleClose}>
             Fechar
           </Button>
-          <Button variant="primary" type="submit" form="roomForm">
+          <Button variant="success" type="submit" form="roomForm">
             Salvar
           </Button>
         </Modal.Footer>

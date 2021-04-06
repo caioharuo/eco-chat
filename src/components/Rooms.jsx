@@ -1,65 +1,64 @@
 import React, { useState } from "react";
-import { Table } from "react-bootstrap";
+import { Table,Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
 import RoomModal from "./RoomModal";
 import SignOut from "./SignOut";
-import styles from "../styles/components/Rooms.module.css";
+
 import add from "../assets/images/add.svg";
-import { Button } from "react-bootstrap";
-import { useCollectionData } from "react-firebase-hooks/firestore";
-import { auth, messagesRef, roomsRef } from "../App";
-import { Link } from "react-router-dom";
+
 import { useAuthState } from "react-firebase-hooks/auth";
 
+import roomRepository from "../database/repositories/RoomRepository";
+
+import styles from "../styles/components/Rooms.module.css";
+
+//Hook de Salas
+import { useCollectionData } from "react-firebase-hooks/firestore";
+import { auth, roomsRef } from "../database/firebase";
+
+
 export default function Rooms() {
+  const maxRooms = 10;
+
   const [user] = useAuthState(auth);
+  const [show, setShow] = useState(false);
 
+  //Hook de Salas
   const query = roomsRef.orderBy("createdAt");
-
   const [rooms] = useCollectionData(query, { idField: "id" });
 
-  const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
-
-  const limitRooms = 10;
   const roomsCount = rooms?.length;
 
-  const handleDeleteRoom = (room) => {
-    roomsRef.doc(room.id).delete();
+  
+  const handleShow = () => setShow(true);
 
-    messagesRef
-      .where("roomId", "==", room.id)
-      .get()
-      .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          messagesRef.doc(doc.id).delete();
-        });
-      });
-  };
+  const handleDeleteRoom = (room) => roomRepository.deleteRoom(room.id);
 
   return (
-    <div className={styles.roomsContainer}>
+    <div className={styles.rooms}>
       <SignOut />
 
       <RoomModal rooms={rooms} show={show} setShow={setShow} />
 
-      <div className={styles.roomsTitleContainer}>
-        <h2 className={styles.roomsTitleContainer__title}>Salas</h2>
-        <span className={styles.roomsTitleContainer__count}>
-          {roomsCount}/{limitRooms}
+      <div className={styles.rooms__titleContainer}>
+        <h2 className={styles.rooms__title}>Salas</h2>
+        <span className={styles.rooms__counter}>
+          {roomsCount}/{maxRooms}
         </span>
       </div>
 
-      {roomsCount < limitRooms && (
+      {roomsCount < maxRooms && (
         <Button
           variant="success"
           onClick={handleShow}
-          className={styles.createRoomButton}
+          className={styles.rooms__createRooomButton}
         >
           <img src={add} alt="" /> Criar sala
         </Button>
       )}
 
-      <Table striped bordered hover className={styles.roomsTable}>
+      <Table striped bordered hover className={styles.rooms__table}>
         <thead>
           <tr>
             <th>Sala</th>
@@ -73,7 +72,7 @@ export default function Rooms() {
               <tr key={index}>
                 <td>{room.name}</td>
                 <td>0</td>
-                <td className={styles.roomsTable__actions}>
+                <td className={styles.rooms__tableActions}>
                   <Link to={`/chat/${room.id}`}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +81,7 @@ export default function Rooms() {
                       viewBox="0 0 24 24"
                       width="24px"
                       fill="#000000"
-                      className={styles.join}
+                      className={styles.rooms__tableActionJoin}
                     >
                       <g>
                         <rect fill="none" height="24" width="24" />
@@ -92,22 +91,21 @@ export default function Rooms() {
                       </g>
                     </svg>
                   </Link>
-                  {room.admin === user.uid && (
-                    <>
-                      <button onClick={() => handleDeleteRoom(room)}>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          height="24px"
-                          viewBox="0 0 24 24"
-                          width="24px"
-                          fill="#000000"
-                          className={styles.delete}
-                        >
-                          <path d="M0 0h24v24H0V0z" fill="none" />
-                          <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z" />
-                        </svg>
-                      </button>
-                    </>
+
+                  {room.admin === user?.uid && (
+                    <button onClick={() => handleDeleteRoom(room)}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="24px"
+                        viewBox="0 0 24 24"
+                        width="24px"
+                        fill="#000000"
+                        className={styles.rooms__tableActionDelete}
+                      >
+                        <path d="M0 0h24v24H0V0z" fill="none" />
+                        <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z" />
+                      </svg>
+                    </button>
                   )}
                 </td>
               </tr>

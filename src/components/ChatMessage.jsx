@@ -1,4 +1,4 @@
-import { auth } from "../App.jsx";
+import { auth } from "../database/firebase";
 
 import React from "react";
 
@@ -14,15 +14,21 @@ export default function ChatMessage(props) {
   const hours = createdAt.toDate().getHours().toString().padStart(2, "0");
   const timeFormatated = `${hours}:${minutes}`;
 
-  const messageClass = isSentUser ? styles.sent : styles.received;
+  const messageClass = isSentUser
+    ? styles.chatMessage__messageSent
+    : styles.chatMessage__messageReceived;
 
   return (
-    <div className={`${styles.message} ${messageClass}`}>
-      <img src={photoURL} alt="" />
-      <div className={styles.messageContainer}>
-        {!isSentUser && <span className={styles.userName}>{displayName}</span>}
-        <p>{text}</p>
-        <span className={styles.currentTime}>{timeFormatated}</span>
+    <div className={`${styles.chatMessage} ${messageClass}`}>
+      <img src={photoURL} alt="" className={styles.chatMessage__userPhoto} />
+      <div className={styles.chatMessage__messageContainer}>
+        {!isSentUser && (
+          <span className={styles.chatMessage__userName}>{displayName}</span>
+        )}
+        <p className={styles.chatMessage__message}>{text}</p>
+        <span className={styles.chatMessage__currentTime}>
+          {timeFormatated}
+        </span>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-.signinContainer {
+.home {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,61 +8,53 @@
   margin: 0 auto;
 }
 
-.signinContainer section {
+.home__mainSection {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.logoSection {
   max-width: 25vw;
 }
 
-.logoSection > button:hover {
-  color: #fff;
-  background-color: #050505;
-}
-
-.logo {
+.home__logo {
   display: flex;
+  min-width: 300px;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 30px;
 }
 
-.logo h2 {
+.home__logo h2 {
   margin: 0;
   color: var(--text);
 }
 
-.logo img {
+.home__logo img {
   width: 100%;
 }
 
-.landingSection img {
+.home__landingSection img {
   width: 40vw;
   margin-left: 3rem;
 }
 
 @media (max-width: 1024px) {
-  .signinContainer {
+  .home {
     justify-content: center;
   }
 
-  .logoSection {
+  .home__logoSection {
     max-width: 100vw;
   }
 
-  .logo {
+  .home__logo {
     width: 70vw;
   }
 
-  .logo img {
-    min-width: 80vw;
+  .home__logo img {
+    min-width: 70vw;
   }
 
-  .landingSection img {
+  .home__landingSection img {
     display: none;
   }
 }

@@ -1,79 +1,53 @@
-button {
-  background-color: transparent;
-  border: none;
-}
-
-.roomsContainer {
+.rooms {
   text-align: center;
 }
 
-.roomsContainer h2 {
-  text-align: center;
+.rooms__titleContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
 }
 
-.roomsContainer table {
-  height: 11.25rem;
+.rooms__title {
+  margin: 0;
+}
+
+.rooms__createRooomButton {
+  margin-bottom: 0.75rem;
+}
+
+.rooms__table {
+  height: auto;
+  max-height: 13.25rem;
   overflow: auto;
   display: block;
   table-layout: auto;
-}
-.roomsContainer table td,
-.roomsContainer table th {
-  vertical-align: middle;
+  margin-bottom: 0;
 }
 
-.roomsTable::-webkit-scrollbar {
-  width: 0.25rem;
-}
-
-.roomsTable::-webkit-scrollbar-track {
-  background: #1e1e24;
-}
-
-.roomsTable::-webkit-scrollbar-thumb {
-  background: #58ac5e;
-}
-
-.createdRooms {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 15px 15px 0;
-}
-
-.createdRooms:last-child {
-  padding-bottom: 0;
-}
-
-.createdRooms li {
-  list-style: none;
-  font-weight: 600;
-}
-
-.roomsTable__actions {
+.rooms__tableActions {
   display: flex;
   height: 100%;
   justify-content: space-around;
   align-items: center;
 }
 
-.join:hover {
+.rooms__tableActionJoin:hover {
   fill: #58ac5e;
 }
 
-.delete:hover {
+.rooms__tableActionDelete:hover {
   fill: #f44336;
 }
 
-.roomsTitleContainer__title {
-  margin: 0;
+.rooms__table::-webkit-scrollbar {
+  width: 0.25rem;
 }
 
-.roomsTitleContainer__count {
-  display: inline-block;
-  margin-bottom: 0.25rem;
+.rooms__table::-webkit-scrollbar-track {
+  background: #1e1e24;
 }
 
-.createRoomButton {
-  margin-bottom: 0.75rem;
+.rooms__table::-webkit-scrollbar-thumb {
+  background: #58ac5e;
 }
