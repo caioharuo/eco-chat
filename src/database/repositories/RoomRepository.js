@@ -8,11 +8,12 @@ class RoomRepository {
     return dataRef.data();
   }
 
-  async createRoom(roomName) {
+  async createRoom(room) {
     const { uid } = auth.currentUser;
 
     await roomsRef.add({
-      name: roomName.trim(),
+      name: room.name.trim(),
+      description: room.description.trim(),
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       admin: uid,
     });

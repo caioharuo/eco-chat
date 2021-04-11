@@ -9,11 +9,24 @@ import messageRepository from "../database/repositories/MessageRepository";
 import roomRepository from "../database/repositories/RoomRepository";
 
 import styles from "../styles/pages/ChatRoom.module.css";
+import format from "date-format";
 
 //Hook de Mensagens
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
 import { messagesRef } from "../database/firebase";
+
+const groupBy = (items, key) => {
+  if (!items) return {};
+
+  return items.reduce(
+    (result, item) => ({
+      ...result,
+      [item[key]]: [...(result[item[key]] || []), item],
+    }),
+    {}
+  );
+};
 
 export default function ChatRoom() {
   const { roomId } = useParams();
@@ -32,11 +45,28 @@ export default function ChatRoom() {
 
   //Hook de Mensagens
   const query = messagesRef.orderBy("createdAt");
-  const [messages] = useCollectionData(query, { idField: "id" });
-  const messageFromRoom = messages?.filter((x) => x.roomId === roomId);
+  const [messages, loading] = useCollectionData(query, { idField: "id" });
+
+  if (loading || !roomName) {
+    return <Loading />;
+  }
+
+  const messagesFromRoom = messages.filter((x) => x.roomId === roomId);
+
+  const groupedMessages = groupBy(
+    messagesFromRoom.map((m) => {
+      return {
+        ...m,
+        createdDay: format.asString("dd/MM/yyyy", m.createdAt?.toDate()),
+      };
+    }),
+    "createdDay"
+  );
 
   const sendMessage = async (e) => {
     e.preventDefault();
+
+    if (formValue.trim().length === 0) return;
 
     const message = { roomId, text: formValue };
     await messageRepository.sendMessage(message);
@@ -45,10 +75,6 @@ export default function ChatRoom() {
 
     dummy.current.scrollIntoView({ behavior: "smooth" });
   };
-
-  if (!roomName) {
-    return <Loading />;
-  }
 
   return (
     <div className={styles.chatRoom}>
@@ -72,10 +98,20 @@ export default function ChatRoom() {
         <section className={styles.chatRoom__messagesContainer}>
           <main className={styles.chatRoom__mainSection}>
             <div>
-              {messageFromRoom &&
-                messageFromRoom.map((msg) => (
-                  <ChatMessage key={msg.id} message={msg} />
-                ))}
+              {groupedMessages &&
+                Object.keys(groupedMessages).map((day) => {
+                  let messagesFromDay = groupedMessages[day];
+
+                  return (
+                    <div key={day}>
+                      <h3 className={styles.chatRoom__dayContainer}>{day}</h3>
+                      {messagesFromDay.map((msg) => (
+                        <ChatMessage key={msg.id} message={msg} />
+                      ))}
+                    </div>
+                  );
+                })}
+          
             </div>
 
             <div ref={dummy}></div>

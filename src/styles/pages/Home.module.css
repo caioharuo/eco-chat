@@ -47,12 +47,12 @@
   }
 
   .home__logo {
-    width: 70vw;
+    width: 50vw;
   }
 
-  .home__logo img {
-    min-width: 70vw;
-  }
+ /*  .home__logo img {
+    min-width: 50vw;
+  } */
 
   .home__landingSection img {
     display: none;
