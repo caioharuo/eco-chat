@@ -15,3 +15,4 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 export const messagesRef = firestore.collection("messages");
 export const roomsRef = firestore.collection("rooms");
+export const membersRef = firestore.collection("members");

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { Table, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
@@ -24,7 +24,7 @@ export default function Rooms() {
   const [show, setShow] = useState(false);
 
   //Hook de Salas
-  const query = roomsRef.orderBy("createdAt");
+  const query = roomsRef.orderBy("createdAt","desc");
   const [rooms] = useCollectionData(query, { idField: "id" });
 
   const roomsCount = rooms?.length;
@@ -41,21 +41,6 @@ export default function Rooms() {
 
       <div className={styles.rooms__titleContainer}>
         <h2 className={styles.rooms__title}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            enableBackground="new 0 0 24 24"
-            height="24px"
-            viewBox="0 0 24 24"
-            width="24px"
-            fill="#000000"
-          >
-            <g>
-              <path d="M0,0h24v24H0V0z" fill="none" />
-            </g>
-            <g>
-              <path d="M19,19V5c0-1.1-0.9-2-2-2H7C5.9,3,5,3.9,5,5v14H3v2h18v-2H19z M15,13h-2v-2h2V13z" />
-            </g>
-          </svg>
           Salas
         </h2>
         <span className={styles.rooms__counter}>
@@ -77,7 +62,7 @@ export default function Rooms() {
         <thead>
           <tr>
             <th>Sala</th>
-            <th>Membros ativos</th>
+            <th>Total de Membros</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -86,7 +71,7 @@ export default function Rooms() {
             return (
               <tr key={index}>
                 <td>{room.name}</td>
-                <td>0</td>
+                <td>{room.membersCount}</td>
                 <td className={styles.rooms__tableActions}>
                   <Link to={`/chat/${room.id}`}>
                     <svg

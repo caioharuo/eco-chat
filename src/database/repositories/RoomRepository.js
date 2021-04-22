@@ -1,5 +1,5 @@
 import firebase from "firebase/app";
-import { auth, roomsRef, messagesRef } from "../firebase";
+import { auth, roomsRef, messagesRef, membersRef } from "../firebase";
 
 class RoomRepository {
   async getById(id) {
@@ -16,6 +16,7 @@ class RoomRepository {
       description: room.description.trim(),
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       admin: uid,
+      membersCount: 0
     });
   }
 
@@ -28,6 +29,15 @@ class RoomRepository {
       .then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
           messagesRef.doc(doc.id).delete();
+        });
+      });
+
+      membersRef
+      .where("roomId", "==", id)
+      .get()
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          membersRef.doc(doc.id).delete();
         });
       });
   }
