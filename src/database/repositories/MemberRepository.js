@@ -1,5 +1,5 @@
 import firebase from "firebase/app";
-import { auth, membersRef, roomsRef } from "../firebase";
+import { membersRef, roomsRef } from "../firebase";
 
 class MemberRepository {
   async getAllMembers(roomId) {
@@ -16,8 +16,8 @@ class MemberRepository {
     return snapshot.docs.map((doc) => doc.data());
   }
 
-  async enterInRoom(roomId) {
-    const { uid, displayName } = auth.currentUser;
+  async enterInRoom(roomId, user) {
+    const { uid, displayName } = user;
 
     const userAlreadyInRoom =
       (await this.verifyIfUserbyRoom(uid, roomId))?.length > 0;

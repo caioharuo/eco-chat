@@ -41,6 +41,7 @@
 }
 
 .chatRoom__description {
+  color: #f2f2f2;
   font-size: 1rem;
   padding: 0.75rem;
   width: 15vw;
@@ -48,10 +49,6 @@
   resize: none;
   border-radius: 10px;
   background-color: transparent;
-}
-
-.chatRoom__description:disabled {
-  border-color: #f2f2f2;
 }
 
 .chatRoom__roomMembers {
@@ -81,16 +78,28 @@
 
 .chatRoom__member {
   list-style: none;
+  font-size: 1.25rem;
 }
 
-.chatRoom__roomInformations footer {  
+.chatRoom__member::before {
+  content: "";
+  height: 6px;
+  width: 6px;
+  background-color: white;
+  border-radius: 50%;
+  display: inline-block;
+
+  margin-right: 6px;
+}
+
+.chatRoom__roomInformations footer {
   background: #232323;
   height: 25%;
   text-align: center;
 }
 
 .chatRoom__footerLogo {
-  width: 18rem;
+  width: 80%;
 }
 
 .chatRoom__chatContainer {
@@ -98,7 +107,7 @@
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
-  width: 75vw;
+  width: 100vw;
   height: 100%;
 }
 
@@ -149,7 +158,7 @@
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
-  padding: 30px 30px 10px 30px;
+  padding: 30px 75px 10px 60px;
 }
 
 .chatRoom__mainSection::-webkit-scrollbar {

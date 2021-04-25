@@ -16,11 +16,17 @@ class RoomRepository {
       description: room.description.trim(),
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       admin: uid,
-      membersCount: 0
+      membersCount: 0,
     });
   }
 
-  async deleteRoom(id){
+  async updateRoom(roomId, description) {
+    await roomsRef.doc(roomId).update({
+      description,
+    });
+  }
+
+  async deleteRoom(id) {
     roomsRef.doc(id).delete();
 
     messagesRef
@@ -32,7 +38,7 @@ class RoomRepository {
         });
       });
 
-      membersRef
+    membersRef
       .where("roomId", "==", id)
       .get()
       .then(function (querySnapshot) {

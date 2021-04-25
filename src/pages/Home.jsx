@@ -18,7 +18,7 @@ function Home() {
       <main className={styles.home__mainSection}>
         <div className={styles.home__logo}>
           <img src={logo} alt="Eco chat" />
-          {user && <h4>Olá, {user.displayName}</h4>}
+          {user && <h5>Olá, {user.displayName}</h5>}
         </div>
         {user ? <Rooms /> : <SignIn />}
       </main>

@@ -12,12 +12,13 @@ import roomRepository from "../database/repositories/RoomRepository";
 import styles from "../styles/pages/ChatRoom.module.css";
 import format from "date-format";
 
-import logo from '../assets/images/logo.svg'
+import logo from "../assets/images/logo.svg";
 
 //Hook de Mensagens
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
-import { messagesRef } from "../database/firebase";
+import { auth, messagesRef, membersRef } from "../database/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const groupBy = (items, key) => {
   if (!items) return {};
@@ -34,24 +35,17 @@ const groupBy = (items, key) => {
 export default function ChatRoom() {
   const { roomId } = useParams();
   const [roomName, setRoomName] = useState("");
-  const [members, setMembers] = useState([]);
   const [createdAt, setCreatedAt] = useState("");
   const [description, setDescription] = useState("");
-  const [formValue, setFormValue] = useState("");
+  const [messageInput, setMessageInput] = useState("");
+  const [adminRoom, setAdminRoom] = useState("");
+
+  const [user] = useAuthState(auth);
 
   const history = useHistory();
-  const dummy = useRef();
+  const dummy = useRef(null);
 
   useEffect(() => {
-    memberRepository.enterInRoom(roomId);
-  }, [roomId]);
-
-  useEffect(() => {
-    async function handleMembers(roomId) {
-      const data = await memberRepository.getAllMembers(roomId);
-      setMembers(data);
-    }
-
     roomRepository.getById(roomId).then((room) => {
       if (room) {
         const formatedDate = format.asString(
@@ -59,20 +53,32 @@ export default function ChatRoom() {
           room.createdAt?.toDate()
         );
 
+        if (user) memberRepository.enterInRoom(roomId, user);
+
         setRoomName(room.name);
         setCreatedAt(formatedDate);
         setDescription(room.description);
-
-        handleMembers(roomId);
-      } else history.push("/");
+        setAdminRoom(room.admin);
+      } else {
+        history.push("/");
+      }
     });
-  }, [roomId, history]);
+  }, [roomId, history, user]);
 
   //Hook de Mensagens
-  const query = messagesRef.orderBy("createdAt");
-  const [messages, loading] = useCollectionData(query, { idField: "id" });
+  const [messages, isLoading] = useCollectionData(
+    messagesRef.orderBy("createdAt"),
+    { idField: "id" }
+  );
 
-  if (loading || !roomName) {
+  //Hook de Membros
+  const [members] = useCollectionData(membersRef.where("roomId", "==", roomId));
+
+  useEffect(() => {
+    dummy.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  if (isLoading || !roomName) {
     return <Loading />;
   }
 
@@ -88,17 +94,21 @@ export default function ChatRoom() {
     "createdDay"
   );
 
+  async function handleChangeDescription(event) {
+    const value = event.target.value;
+
+    await roomRepository.updateRoom(roomId, value);
+  }
+
   const sendMessage = async (e) => {
     e.preventDefault();
 
-    if (formValue.trim().length === 0) return;
+    if (messageInput.trim().length === 0) return;
 
-    const message = { roomId, text: formValue };
+    const message = { roomId, text: messageInput };
     await messageRepository.sendMessage(message);
 
-    setFormValue("");
-
-    dummy.current.scrollIntoView({ behavior: "smooth" });
+    setMessageInput("");
   };
 
   return (
@@ -114,8 +124,13 @@ export default function ChatRoom() {
             <h3 className={styles.chatRoom__titleDescription}>Descrição:</h3>
             <textarea
               className={styles.chatRoom__description}
-              disabled
+              disabled={user.uid !== adminRoom}
               defaultValue={description}
+              onChange={(event) => {
+                const value = event.target.value;
+                setDescription(value);
+              }}
+              onBlur={handleChangeDescription}
             />
           </section>
 
@@ -125,7 +140,7 @@ export default function ChatRoom() {
             </h2>
 
             <ul className={styles.chatRoom__members}>
-              {members.map((member) => {
+              {members?.map((member) => {
                 return (
                   <li key={member.uid} className={styles.chatRoom__member}>
                     {member.displayName}
@@ -136,7 +151,11 @@ export default function ChatRoom() {
           </section>
 
           <footer>
-            <img src={logo} alt="Eco Chat" className={styles.chatRoom__footerLogo}/>
+            <img
+              src={logo}
+              alt="Eco Chat"
+              className={styles.chatRoom__footerLogo}
+            />
           </footer>
         </div>
 
@@ -174,14 +193,13 @@ export default function ChatRoom() {
                     );
                   })}
               </div>
-
-              <div ref={dummy}></div>
+              <div ref={dummy} />
             </main>
           </section>
           <form onSubmit={sendMessage} className={styles.chatRoom__form}>
             <input
-              value={formValue}
-              onChange={(e) => setFormValue(e.target.value)}
+              value={messageInput}
+              onChange={(e) => setMessageInput(e.target.value)}
               className={styles.chatRoom__input}
               placeholder="Digite sua mensagem..."
             />

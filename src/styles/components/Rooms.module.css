@@ -4,7 +4,12 @@
 
 .rooms__titleContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 0.5rem;
   padding: 1rem;
 }
 
@@ -50,4 +55,8 @@
 
 .rooms__table::-webkit-scrollbar-thumb {
   background: #58ac5e;
+}
+
+.rooms__roomsLimit{
+  margin-top: 10px;
 }
