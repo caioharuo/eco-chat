@@ -117,7 +117,7 @@ export default function ChatRoom() {
         <div className={styles.chatRoom__roomInformations}>
           <section className={styles.chatRoom__roomDescription}>
             <h2 className={styles.chatRoom__titleDescriptionSection}>
-              Descrição da Sala
+              Informações da Sala
             </h2>
             <p className={styles.chatRoom__createdAt}>Criado em: {createdAt}</p>
 
