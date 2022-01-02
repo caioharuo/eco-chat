@@ -6,8 +6,6 @@
 
 ## O Eco Chat tem por objetivo conscientizar as pessoas em relação a preservação do meio-ambiente.
 
-#### 🚧 Projeto em Desenvolvimento 🚧
-
 ### 🛠️ Tecnologias Utilizadas
 - ⚛️ [ReactJS](https://pt-br.reactjs.org/)
 - 🔥 [Firebase](https://firebase.google.com/)
